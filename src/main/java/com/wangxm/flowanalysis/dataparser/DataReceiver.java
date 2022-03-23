@@ -1,21 +1,21 @@
 package com.wangxm.flowanalysis.dataparser;
 
+import com.wangxm.flowanalysis.dataparser.packet.MysqlPacket;
 import jpcap.PacketReceiver;
 import jpcap.packet.Packet;
 import jpcap.packet.TCPPacket;
 
-/**
- * 作者: wangxm
- * 日期: 2022/3/22
- * 版本: v2.2.0
- * 备注:
- */
 public class DataReceiver implements PacketReceiver {
 
     @Override
     public void receivePacket(Packet packet) {
         if (packet instanceof TCPPacket) {
-            System.out.println("TCP 协议...");
+            TCPPacket tcpPacket = (TCPPacket) packet;
+            System.out.println("\n--------------------------------------------------");
+            System.out.println("Tcp 协议...");
+            MysqlPacket mysqlPacket = new MysqlPacket(tcpPacket);
+            System.out.println(mysqlPacket);
+            System.out.println("--------------------------------------------------\n");
         } else {
             System.out.println("其他协议...");
         }
