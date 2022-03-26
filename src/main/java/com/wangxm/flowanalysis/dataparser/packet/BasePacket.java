@@ -2,46 +2,49 @@ package com.wangxm.flowanalysis.dataparser.packet;
 
 import com.wangxm.flowanalysis.util.ByteUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class BasePacket {
 
-    private String scrIp;
-    private int scrPort;
+    private String srcIp;
+    private int srcPort;
     private String dstIp;
     private int dstPort;
 
-    public String getScrIp() {
-        return scrIp;
+    public BasePacket(String srcIp, int srcPort, String dstIp, int dstPort) {
+        this.srcIp = srcIp;
+        this.srcPort = srcPort;
+        this.dstIp = dstIp;
+        this.dstPort = dstPort;
     }
 
-    public void setScrIp(byte[] scrIp) {
-        List<String> scrIpItem = new ArrayList<>();
-        for (byte ipItem: scrIp) {
-            scrIpItem.add(String.valueOf(ByteUtil.byte2Int(new byte[] {ipItem})));
-        }
-        this.scrIp = String.join(".", scrIpItem);
+    public BasePacket(byte[] srcIp, int srcPort, byte[] dstIp, int dstPort) {
+        this.srcIp = ByteUtil.byte2Ip(srcIp);
+        this.srcPort = srcPort;
+        this.dstIp = ByteUtil.byte2Ip(dstIp);
+        this.dstPort = dstPort;
     }
 
-    public int getScrPort() {
-        return scrPort;
+    public String getSrcIp() {
+        return srcIp;
     }
 
-    public void setScrPort(int scrPort) {
-        this.scrPort = scrPort;
+    public void setSrcIp(String srcIp) {
+        this.srcIp = srcIp;
+    }
+
+    public int getSrcPort() {
+        return srcPort;
+    }
+
+    public void setSrcPort(int srcPort) {
+        this.srcPort = srcPort;
     }
 
     public String getDstIp() {
         return dstIp;
     }
 
-    public void setDstIp(byte[] dstIp) {
-        List<String> scrIpItem = new ArrayList<>();
-        for (byte ipItem: dstIp) {
-            scrIpItem.add(String.valueOf(ByteUtil.byte2Int(new byte[] {ipItem})));
-        }
-        this.dstIp = String.join(".", scrIpItem);
+    public void setDstIp(String dstIp) {
+        this.dstIp = dstIp;
     }
 
     public int getDstPort() {
@@ -55,8 +58,8 @@ public abstract class BasePacket {
     @Override
     public String toString() {
         return "BasePacket{" +
-                "scrIp='" + scrIp + '\'' +
-                ", scrPort=" + scrPort +
+                "srcIp='" + srcIp + '\'' +
+                ", srcPort=" + srcPort +
                 ", dstIp='" + dstIp + '\'' +
                 ", dstPort=" + dstPort +
                 '}';

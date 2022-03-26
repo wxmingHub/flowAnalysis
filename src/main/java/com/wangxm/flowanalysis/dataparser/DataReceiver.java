@@ -15,7 +15,7 @@ public class DataReceiver implements PacketReceiver {
             System.out.println("Tcp 协议...");
             MysqlPacket mysqlPacket = new MysqlPacket(tcpPacket);
             System.out.println(mysqlPacket);
-            System.out.println("--------------------------------------------------\n");
+            System.out.println("--------------------------------------------------");
         } else {
             System.out.println("其他协议...");
         }

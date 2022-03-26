@@ -1,6 +1,8 @@
 package com.wangxm.flowanalysis.util;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 字节转向其他数据类型
@@ -61,4 +63,20 @@ public class ByteUtil {
         }
     }
 
+    /**
+     * 将 byte[] 转换为 IPV4
+     *
+     * @param datas
+     * @return
+     */
+    public static String byte2Ip(byte[] datas) {
+        if (datas == null || datas.length < 4) {
+            return "0.0.0.0";
+        }
+        List<String> ipItemList = new ArrayList<>();
+        for (byte ipItem: datas) {
+            ipItemList.add(String.valueOf(ByteUtil.byte2Int(new byte[] {ipItem})));
+        }
+        return String.join(".", ipItemList);
+    }
 }

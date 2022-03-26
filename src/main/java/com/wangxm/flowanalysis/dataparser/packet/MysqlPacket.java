@@ -6,55 +6,63 @@ import jpcap.packet.TCPPacket;
 import java.util.Arrays;
 
 public class MysqlPacket extends BasePacket {
-
-    private String data;
-    private int length;
-    private int number;
+    /**
+     * length of compressed payload
+     */
+    private int compLen;
+    /**
+     * compressed sequence id
+     */
+    private int sequenceId;
+    /**
+     * length of payload before compression
+     */
+    private int command;
+    /**
+     * payload
+     */
+    private byte[] payload;
 
     public MysqlPacket(TCPPacket packet) {
-        this.length = ByteUtil.byte2Int(Arrays.copyOfRange(packet.data, 0, 3));
-        if (this.length != 0) {
-            this.number = ByteUtil.byte2Int(Arrays.copyOfRange(packet.data, 3, 4));
-            this.data = ByteUtil.byte2String(Arrays.copyOfRange(packet.data, 4, packet.data.length));
+        super(packet.src_ip.getAddress(), packet.src_port, packet.dst_ip.getAddress(), packet.dst_port);
+
+        this.compLen = ByteUtil.byte2Int(Arrays.copyOfRange(packet.data, 0, 3));
+        if (this.compLen != 0) {
+            this.sequenceId = ByteUtil.byte2Int(Arrays.copyOfRange(packet.data, 3, 4));
+            this.command = ByteUtil.byte2Int(Arrays.copyOfRange(packet.data, 4, 5));
+            this.payload = Arrays.copyOfRange(packet.data, 5, packet.data.length);
         }
-
-        setScrIp(packet.src_ip.getAddress());
-        setScrPort(packet.src_port);
-
-        setDstIp(packet.dst_ip.getAddress());
-        setDstPort(packet.dst_port);
     }
 
-    public String getData() {
-        return data;
+    public int getCompLen() {
+        return compLen;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setCompLen(int compLen) {
+        this.compLen = compLen;
     }
 
-    public int getLength() {
-        return length;
+    public int getSequenceId() {
+        return sequenceId;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public void setSequenceId(int sequenceId) {
+        this.sequenceId = sequenceId;
     }
 
-    public int getNumber() {
-        return number;
+    public int getCommand() {
+        return command;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setCommand(int command) {
+        this.command = command;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + " MysqlPacket{" +
-                "data='" + data + '\'' +
-                ", length=" + length +
-                ", number=" + number +
-                '}';
+    public byte[] getPayload() {
+        return payload;
+    }
+
+    public void setPayload(byte[] payload) {
+        this.payload = payload;
     }
 }
