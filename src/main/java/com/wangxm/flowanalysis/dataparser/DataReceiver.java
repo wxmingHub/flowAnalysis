@@ -1,6 +1,6 @@
 package com.wangxm.flowanalysis.dataparser;
 
-import com.wangxm.flowanalysis.dataparser.packet.MysqlPacket;
+import com.wangxm.flowanalysis.dataparser.mysql.MysqlPacket;
 import jpcap.PacketReceiver;
 import jpcap.packet.Packet;
 import jpcap.packet.TCPPacket;

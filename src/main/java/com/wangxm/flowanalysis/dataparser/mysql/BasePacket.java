@@ -1,4 +1,4 @@
-package com.wangxm.flowanalysis.dataparser.packet;
+package com.wangxm.flowanalysis.dataparser.mysql;
 
 import com.wangxm.flowanalysis.util.ByteUtil;
 
