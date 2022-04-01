@@ -6,5 +6,13 @@ package com.wangxm.flowanalysis.dataparser.mysql.command;
  * 版本: v2.2.0
  * 备注:
  */
-public class BaseCommand {
+public interface BaseCommand {
+
+    default void init(byte[] payload) {
+
+    }
+
+    default String value() {
+        return "";
+    }
 }

@@ -6,5 +6,5 @@ package com.wangxm.flowanalysis.dataparser.mysql.command;
  * 版本: v2.2.0
  * 备注:
  */
-public class ComShutdown extends BaseCommand {
+public class ComShutdown implements BaseCommand {
 }

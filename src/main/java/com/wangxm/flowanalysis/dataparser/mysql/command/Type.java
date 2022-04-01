@@ -6,7 +6,7 @@ package com.wangxm.flowanalysis.dataparser.mysql.command;
  * 版本: v2.2.0
  * 备注:
  */
-public enum Command {
+public enum Type {
 
     COM_SLEEP(0x00, ComSleep.class, "服务器内部命令"),
     COM_QUIT(0x01, ComQuit.class, "关闭连接"),
@@ -43,15 +43,27 @@ public enum Command {
     private int code;
     private Class clazz;
     private String desc;
-    
-    Command(int code, Class clazz, String desc) {
+
+    Type(int code, Class clazz, String desc) {
         this.code = code;
         this.clazz = clazz;
         this.desc = desc;
     }
 
-    public static Command findCommandByCode(int code) {
-        for (Command command: values()) {
+    public int getCode() {
+        return code;
+    }
+
+    public Class getClazz() {
+        return clazz;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public static Type findCommandByCode(int code) {
+        for (Type command: values()) {
             if (code == command.code) {
                 return command;
             }

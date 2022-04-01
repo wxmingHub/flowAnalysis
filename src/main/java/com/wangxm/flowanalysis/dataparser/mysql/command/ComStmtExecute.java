@@ -6,5 +6,5 @@ package com.wangxm.flowanalysis.dataparser.mysql.command;
  * 版本: v2.2.0
  * 备注:
  */
-public class ComStmtExecute extends BaseCommand {
+public class ComStmtExecute implements BaseCommand {
 }

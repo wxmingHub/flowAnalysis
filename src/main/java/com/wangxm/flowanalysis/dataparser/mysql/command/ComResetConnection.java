@@ -6,5 +6,5 @@ package com.wangxm.flowanalysis.dataparser.mysql.command;
  * 版本: v2.2.0
  * 备注:
  */
-public class ComResetConnection extends BaseCommand {
+public class ComResetConnection implements BaseCommand {
 }
