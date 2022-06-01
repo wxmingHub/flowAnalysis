@@ -33,7 +33,9 @@ public class MysqlPacket extends BasePacket {
     public MysqlPacket(TCPPacket packet) {
         super(packet.src_ip.getAddress(), packet.src_port, packet.dst_ip.getAddress(), packet.dst_port);
 
-        this.compLen = ByteUtil.byte2Int(Arrays.copyOfRange(packet.data, 0, 3));
+        if (packet.data != null && packet.data.length >= 3) {
+            this.compLen = ByteUtil.byte2Int(Arrays.copyOfRange(packet.data, 0, 3));
+        }
         if (this.compLen != 0) {
             this.sequenceId = ByteUtil.byte2Int(Arrays.copyOfRange(packet.data, 3, 4));
             this.type = Type.findCommandByCode(ByteUtil.byte2Int(Arrays.copyOfRange(packet.data, 4, 5)));
@@ -59,8 +61,8 @@ public class MysqlPacket extends BasePacket {
         return super.toString() + " - MysqlPacket{" +
                 "compLen=" + compLen +
                 ", sequenceId=" + sequenceId +
-                ", type=" + type +
-                ", command=" + command.value() +
+                ", type=" + (type == null ? "" : type) +
+                ", command=" + (command == null ? "" : command.value()) +
                 '}';
     }
 }
